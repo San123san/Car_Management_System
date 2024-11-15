@@ -24,6 +24,9 @@ const YourProductPage = () => {
         const response = await axios.post('https://car-management-system-fyne-assessment.onrender.com/api/v1/carProduct/listProduct',
           null, 
           { 
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,  // Send token in Authorization header
+          },
               withCredentials: true  // Make sure this is true for authenticated requests
           }
         );
