@@ -102,7 +102,7 @@ const userCarRelatedInformation = asyncHandler(async (req, res) => {
 
 
         res.status(200)
-        .cookie("accessToken", token, {
+        .cookie("accessToken", accessToken, {
                httpOnly: true,
                secure: true, // Ensure this is set to true on production
                sameSite: 'None', // SameSite=None allows cookies to be sent cross-domain
