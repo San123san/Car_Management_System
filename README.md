@@ -34,10 +34,14 @@ The Car Management Application allows users to manage cars in an intuitive way. 
 - Node.js
 - Tailwind CSS
 
+---
+
 ### How to install and run
 1. Clone the repo.
 2. Install necessary dependecies.
 3. On frontend and backend terminal run: npm run dev
+
+---
 
 ### Additional Notes
 - Ensure MongoDB is running locally or configure the connection URI in backend/config/database.js.
