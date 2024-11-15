@@ -1,30 +1,27 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
-import axios from 'axios'; // Import axios for making HTTP requests
+import { useNavigate } from 'react-router-dom'; 
+import axios from 'axios'; 
 
 const SignUpPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState(''); // State to hold error messages
-  const [successMessage, setSuccessMessage] = useState(''); // State to hold success messages
-  const navigate = useNavigate(); // Initialize navigate function for navigation
+  const [errorMessage, setErrorMessage] = useState(''); 
+  const [successMessage, setSuccessMessage] = useState(''); 
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Reset any previous messages
     setErrorMessage('');
     setSuccessMessage('');
 
-    // Basic validation: Check if email or password is missing
     if (!email.trim() || !password.trim()) {
       setErrorMessage('Both email and password are required.');
       return;
     }
 
     try {
-      // Send POST request to backend API
-      const response = await axios.post('/api/v1/users/register', {
+      const response = await axios.post('https://car-management-system-fyne-assessment.onrender.com/api/v1/users/register', {
         email,
         password
       });
@@ -32,36 +29,29 @@ const SignUpPage = () => {
       if (response.status === 201) {
         console.log('User signed up successfully', response.data);
 
-        // Set the success message
         setSuccessMessage('You have created an account successfully!');
 
-        // Optionally, navigate to the login page after showing the success message
         setTimeout(() => {
-          navigate('/sign-in'); // Navigate to sign-in page after 3 seconds
+          navigate('/sign-in'); 
         }, 3000);
       }
     } catch (error) {
       console.error('Error during signup:', error.response?.data || error.message);
 
-      // Handle specific error responses from backend
       if (error.response?.status === 400) {
-        // Missing email or password (although already handled in the frontend)
         setErrorMessage('Both email and password are required.');
       } else if (error.response?.status === 409) {
-        // User already exists (email conflict)
         setErrorMessage('A user with this email already exists.');
       } else if (error.response?.status === 500) {
-        // Internal server error or any other server-side issue
         setErrorMessage('Something went wrong. Please try again later.');
       } else {
-        // Default error message for other cases
         setErrorMessage('An unexpected error occurred. Please try again.');
       }
     }
   };
 
   const handleCancel = () => {
-    navigate('/'); // Navigates to the home page when the cancel button is clicked
+    navigate('/'); 
   };
 
   return (
@@ -76,14 +66,12 @@ const SignUpPage = () => {
         </button>
       </div>
 
-      {/* Display success message if exists */}
       {successMessage && (
         <div className="mb-4 text-green-500 text-sm">
           <p>{successMessage}</p>
         </div>
       )}
 
-      {/* Display error message if exists */}
       {errorMessage && (
         <div className="mb-4 text-red-500 text-sm">
           <p>{errorMessage}</p>

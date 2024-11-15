@@ -18,7 +18,6 @@ const Navbar = () => {
 
   const handleSignOut = async () => {
     try {
-      // Make a request to the backend to log out the user
       await axios.post('https://car-management-system-fyne-assessment.onrender.com/api/v1/users/logout', {}, { withCredentials: true });
 
       localStorage.removeItem('accessToken');
@@ -35,7 +34,6 @@ const Navbar = () => {
   return (
     <nav className="bg-gray-800 text-white p-4">
       <div className="max-w-6xl mx-auto flex justify-between items-center">
-        {/* Logo or Brand Name */}
         <div className="flex items-center space-x-6">
           <NavLink
             to="/"
@@ -45,7 +43,6 @@ const Navbar = () => {
             Home
           </NavLink>
 
-          {/* Conditionally render the "Your Product" link */}
           {isAuthenticated && (
             <NavLink
               to="/your-product"
@@ -57,7 +54,6 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Desktop menu */}
         <div className="hidden md:flex space-x-6">
           {!isAuthenticated ? (
             <>
@@ -78,7 +74,6 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Hamburger icon for mobile */}
         <button
           className="md:hidden text-white"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -90,22 +85,20 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile menu */}
       {isMenuOpen && (
         <div className="md:hidden mt-4 space-y-4">
           <NavLink
             to="/"
             className="block text-lg font-semibold"
-            onClick={() => setIsMenuOpen(false)}  // Close menu after selection
+            onClick={() => setIsMenuOpen(false)}  
           >
             Home
           </NavLink>
-          {/* Conditionally render the "Your Product" link */}
           {isAuthenticated && (
             <NavLink
               to="/your-product"
               className="block text-lg font-semibold"
-              onClick={() => setIsMenuOpen(false)}  // Close menu after selection
+              onClick={() => setIsMenuOpen(false)}  
             >
               Your Product
             </NavLink>
@@ -115,14 +108,14 @@ const Navbar = () => {
               <NavLink
                 to="/sign-up"
                 className="block text-lg font-semibold"
-                onClick={() => setIsMenuOpen(false)}  // Close menu after selection
+                onClick={() => setIsMenuOpen(false)}  
               >
                 Sign Up
               </NavLink>
               <NavLink
                 to="/sign-in"
                 className="block text-lg font-semibold"
-                onClick={() => setIsMenuOpen(false)}  // Close menu after selection
+                onClick={() => setIsMenuOpen(false)}  
               >
                 Sign In
               </NavLink>

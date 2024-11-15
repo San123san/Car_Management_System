@@ -5,26 +5,25 @@ import axios from 'axios';
 const SignInPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // Initialize navigate function for navigation
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/api/v1/users/login', { email, password }, { withCredentials: true });
+      const response = await axios.post('https://car-management-system-fyne-assessment.onrender.com/api/v1/users/login', { email, password }, { withCredentials: true });
 
-      // On success, save the tokens in localStorage
       localStorage.setItem('accessToken', response.data.data.accessToken);
       localStorage.setItem('refreshToken', response.data.data.refreshToken);
 
-      navigate('/'); // Redirect to home page after successful login
+      navigate('/'); 
     } catch (error) {
       console.error('Error during sign-in', error);
     }
   };
 
   const handleCancel = () => {
-    navigate('/'); // Navigate to the home page when the cancel button is clicked
+    navigate('/'); 
   };
 
   return (
