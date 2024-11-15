@@ -21,7 +21,12 @@ const YourProductPage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.post('https://car-management-system-fyne-assessment.onrender.com/api/v1/carProduct/listProduct');
+        const response = await axios.post('https://car-management-system-fyne-assessment.onrender.com/api/v1/carProduct/listProduct',
+          null, 
+          { 
+              withCredentials: true  // Make sure this is true for authenticated requests
+          }
+        );
         const carInformation = response.data.data;
 
         const processedProducts = carInformation.map((product) => ({
