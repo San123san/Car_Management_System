@@ -5,19 +5,17 @@ const ProductCard = ({ image, title, description, tags, images }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Open Modal
   const openModal = (e) => {
-    e.stopPropagation(); // Prevent click event from propagating to parent
+    e.stopPropagation(); 
     setIsModalOpen(true);
   };
 
-  // Close Modal
   const closeModal = () => setIsModalOpen(false);
 
   // Go to next image
   const nextImage = useCallback(() => {
     setCurrentImageIndex((prevIndex) => {
-      const nextIndex = (prevIndex + 1) % images.length; // Ensure wrapping around
+      const nextIndex = (prevIndex + 1) % images.length; 
       return nextIndex;
     });
   }, [images.length]);
@@ -25,7 +23,7 @@ const ProductCard = ({ image, title, description, tags, images }) => {
   // Go to previous image
   const prevImage = useCallback(() => {
     setCurrentImageIndex((prevIndex) => {
-      const prevIndexValue = (prevIndex - 1 + images.length) % images.length; // Ensure wrapping around
+      const prevIndexValue = (prevIndex - 1 + images.length) % images.length; 
       return prevIndexValue;
     });
   }, [images.length]);
