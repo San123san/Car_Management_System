@@ -19,9 +19,9 @@ const Navbar = () => {
   const handleSignOut = async () => {
     try {
       await axios.post('https://car-management-system-fyne-assessment.onrender.com/api/v1/users/logout', null , { 
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,  // Send token in Authorization header
-        },
+        // headers: {
+        //     Authorization: `Bearer ${localStorage.getItem('accessToken')}`,  // Send token in Authorization header
+        // },
         withCredentials: true 
       });
 
