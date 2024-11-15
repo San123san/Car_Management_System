@@ -4,32 +4,28 @@ import axios from 'axios';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Track if the user is authenticated
-  const navigate = useNavigate(); // Initialize navigate function for navigation
+  const [isAuthenticated, setIsAuthenticated] = useState(false); 
+  const navigate = useNavigate();
 
-  // Check if the user is authenticated when the component mounts
   useEffect(() => {
-    // Check for authentication by checking if the accessToken exists in cookies or localStorage
-    const accessToken = localStorage.getItem('accessToken'); // Check if token exists in localStorage
+    const accessToken = localStorage.getItem('accessToken'); 
     if (accessToken) {
-      setIsAuthenticated(true); // User is authenticated if token exists
+      setIsAuthenticated(true); 
     } else {
-      setIsAuthenticated(false); // Otherwise, user is not authenticated
+      setIsAuthenticated(false);
     }
-  }, []); // Run this once when the component mounts
+  }, []);
 
-  // Handle user sign-out
   const handleSignOut = async () => {
     try {
       // Make a request to the backend to log out the user
-      await axios.post('/api/v1/users/logout', {}, { withCredentials: true });
+      await axios.post('https://car-management-system-fyne-assessment.onrender.com/api/v1/users/logout', {}, { withCredentials: true });
 
-      // Clear the tokens from localStorage
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
 
-      setIsAuthenticated(false); // Update UI to reflect the user is signed out
-      navigate('/'); // Redirect to home page after sign-out
+      setIsAuthenticated(false);
+      navigate('/');
       window.location.reload();
     } catch (error) {
       console.error('Error during sign-out', error);
