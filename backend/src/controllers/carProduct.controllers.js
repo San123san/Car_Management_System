@@ -94,20 +94,7 @@ const userCarRelatedInformation = asyncHandler(async (req, res) => {
             tags: carUploadInformation.tags
         }));
 
-        const options = {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'None'
-    }
-
-
-        res.status(200)
-        .cookie("accessToken", accessToken, {
-               httpOnly: true,
-               secure: true, // Ensure this is set to true on production
-               sameSite: 'None', // SameSite=None allows cookies to be sent cross-domain
-          })
-        .json(new ApiResponse(200, carInformation, "Images retireve")
+        res.status(200).json(new ApiResponse(200, carInformation, "Images retireve")
         )
     } catch (error) {
         throw new ApiError(500, error.message || "Failed to retrieve images");
