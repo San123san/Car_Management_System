@@ -1,14 +1,17 @@
-// import { defineConfig } from 'vite'
-// import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
-// // https://vitejs.dev/config/
-// export default defineConfig({
-//   server:{
-//     proxy:{
-//     },
-//   },
-//   plugins: [react()],
-// })
+// https://vitejs.dev/config/
+export default defineConfig({
+  server:{
+    proxy:{
+      '/api/v1/users': 'https://car-management-system-fyne-assessment.onrender.com',
+      '/api/v1/carProduct': 'https://car-management-system-fyne-assessment.onrender.com',
+    },
+  },
+  plugins: [react()],
+})
+
 
 // import { defineConfig } from 'vite'
 // import react from '@vitejs/plugin-react'
@@ -26,19 +29,6 @@
 //   },
 //   plugins: [react()],
 // })
-
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-
-// Vite configuration without any proxy setup
-export default defineConfig({
-  build: {
-    outDir: 'backend/dist', 
-  },
-  base: '/',
-  plugins: [react()],
-})
-
 
 // import { defineConfig } from 'vite'
 // import react from '@vitejs/plugin-react'

@@ -3,19 +3,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser'
 import path from 'path';
 
-import { fileURLToPath } from 'url';
-
 const app = express()
-
-// Get the current directory path
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Serve the frontend index.html on unknown routes
-app.get('*', (req, res) => {
-  // res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
-  return res.sendFile(path.join(process.cwd(), 'frontend', 'dist', 'index.html'));
-});
 
 app.use(cors({
     origin: process.env.CORS_ORIGIN,
