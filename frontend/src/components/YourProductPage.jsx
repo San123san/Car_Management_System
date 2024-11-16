@@ -104,7 +104,8 @@ const YourProductPage = () => {
       );
 
       console.log('Product uploaded:', response.data);
-      navigate('/your-product');  // Navigate to the "Your Products" page after successful upload
+      // navigate('/your-product');  // Navigate to the "Your Products" page after successful upload
+      window.location.reload();
     } catch (error) {
       console.error('Error uploading product:', error.response || error.message);
       alert('There was an error uploading the product. Please try again.');
@@ -139,7 +140,8 @@ const YourProductPage = () => {
       );
 
       console.log('Product updated:', response.data);
-      navigate('/your-product');  // Navigate to the "Your Products" page after successful update
+      // navigate('/your-product');  // Navigate to the "Your Products" page after successful update
+      window.location.reload();
     } catch (error) {
       console.error('Error updating product:', error.response || error.message);
       alert('There was an error updating the product. Please try again.');
@@ -161,7 +163,8 @@ const YourProductPage = () => {
       );
 
       console.log('Product deleted:', response.data);
-      navigate('/your-product');  // Navigate to the "Your Products" page after successful deletion
+      // navigate('/your-product');  // Navigate to the "Your Products" page after successful deletion
+      window.location.reload();
     } catch (error) {
       console.error('Error deleting product:', error.response || error.message);
       alert('There was an error deleting the product. Please try again.');
