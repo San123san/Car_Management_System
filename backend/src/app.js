@@ -25,10 +25,6 @@ import carRouter from './routes/car_product.routes.js'
 app.use("/api/v1/users", userRouter)
 app.use("/api/v1/carProduct", carRouter)
 
-app.get('*', (req, res) => {
-  res.redirect('https://car-management-system-fyne-assessment-1.onrender.com'); // Change this to your actual frontend service URL
-});
-
 export {app}
 
 
