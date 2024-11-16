@@ -1,14 +1,14 @@
-// import { defineConfig } from 'vite'
-// import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
-// // https://vitejs.dev/config/
-// export default defineConfig({
-//   server:{
-//     proxy:{
-//     },
-//   },
-//   plugins: [react()],
-// })
+// https://vitejs.dev/config/
+export default defineConfig({
+  server:{
+    proxy:{
+    },
+  },
+  plugins: [react()],
+})
 
 // import { defineConfig } from 'vite'
 // import react from '@vitejs/plugin-react'
@@ -27,14 +27,14 @@
 //   plugins: [react()],
 // })
 
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+// import { defineConfig } from 'vite'
+// import react from '@vitejs/plugin-react'
 
-// Vite configuration without any proxy setup
-export default defineConfig({
-  build: {
-    outDir: 'backend/dist', // Output directory for your React build (to be served by Express)
-    emptyOutDir: true, // Optional: clear the output directory before building
-  },
-  plugins: [react()],
-})
+// // Vite configuration without any proxy setup
+// export default defineConfig({
+//   build: {
+//     outDir: 'backend/dist', // Output directory for your React build (to be served by Express)
+//     emptyOutDir: true, // Optional: clear the output directory before building
+//   },
+//   plugins: [react()],
+// })

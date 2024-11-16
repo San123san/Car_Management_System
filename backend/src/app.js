@@ -12,18 +12,10 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization'],
 }))
 
-
 app.use(express.json({limit: "50mb"}))   //data take when fill form in the format of json
 app.use(express.urlencoded({extended: true, limit:"50mb"}))
 app.use(express.static("public"))
 app.use(cookieParser())
-
-
-// Serve the React app's static files from the 'dist' directory
-const __dirname = path.dirname(new URL(import.meta.url).pathname);  // ES Module workaround
-const distPath = path.resolve(__dirname, '..', 'dist');  // Adjust path if needed (e.g., 'public/dist')
-
-app.use(express.static(distPath));  // Serve static files from the dist directory
 
 
 // routes import
@@ -34,9 +26,12 @@ import carRouter from './routes/car_product.routes.js'
 app.use("/api/v1/users", userRouter)
 app.use("/api/v1/carProduct", carRouter)
 
-// Catch-all route: Any non-API route should return React's index.html
+// Serve static files from the 'dist' directory where Vite's build files are located
+app.use(express.static(path.join(__dirname, 'dist')));
+
+// Catch-all route to serve index.html for any route that is not an API route
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(distPath, 'index.html'));  // Serve the index.html from the Vite build
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 export {app}
