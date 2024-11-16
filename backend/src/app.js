@@ -27,11 +27,11 @@ app.use("/api/v1/users", userRouter)
 app.use("/api/v1/carProduct", carRouter)
 
 // Serve static files from the 'dist' directory where Vite's build files are located
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.resolve('dist')));
 
 // Catch-all route to serve index.html for any route that is not an API route
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  res.sendFile(path.resolve('dist', 'index.html'));
 });
 
 export {app}
