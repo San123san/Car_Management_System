@@ -1,11 +1,12 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';  // Import useNavigate
 import YourNameProductCard from './YourNameProductCard';
 import Navbar from './Navbar';
-import ProductModal from './ProductModal'; 
+import ProductModal from './ProductModal';
 
 const YourProductPage = () => {
+  const navigate = useNavigate();  // Initialize navigate
   const [products, setProducts] = useState([]);
   const [newProduct, setNewProduct] = useState({
     images: [],
@@ -18,16 +19,17 @@ const YourProductPage = () => {
   const [isEditing, setIsEditing] = useState(false); 
   const [editingProductId, setEditingProductId] = useState(null); 
 
+  // Fetch products on initial load
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.post('https://car-management-system-fyne-assessment.onrender.com/api/v1/carProduct/listProduct',
+        const response = await axios.post('https://car-management-system-fyne-assessment.onrender.com/api/v1/carProduct/listProduct', 
           null, 
           { 
             headers: {
               Authorization: `Bearer ${localStorage.getItem('accessToken')}`,  // Send token in Authorization header
-          },
-              withCredentials: true  // Make sure this is true for authenticated requests
+            },
+            withCredentials: true  // Make sure this is true for authenticated requests
           }
         );
         const carInformation = response.data.data;
@@ -47,6 +49,7 @@ const YourProductPage = () => {
     fetchProducts();
   }, []);
 
+  // Handle file selection and image preview
   const handleUploadChange = (e) => {
     const { files } = e.target;
     if (files && files.length > 0) {
@@ -69,6 +72,7 @@ const YourProductPage = () => {
     }
   };
 
+  // Handle product upload
   const handleProductUpload = async (e) => {
     e.preventDefault();
 
@@ -87,39 +91,27 @@ const YourProductPage = () => {
     }
 
     try {
-      const response = await axios.post('https://car-management-system-fyne-assessment.onrender.com/api/v1/carProduct/carImageUploadWithDescriptionTopicTag', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-        withCredentials: true 
-      });
+      const response = await axios.post(
+        'https://car-management-system-fyne-assessment.onrender.com/api/v1/carProduct/carImageUploadWithDescriptionTopicTag',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+          withCredentials: true,
+        }
+      );
 
       console.log('Product uploaded:', response.data);
-      window.location.reload();
+      navigate('/your-product');  // Navigate to the "Your Products" page after successful upload
     } catch (error) {
       console.error('Error uploading product:', error.response || error.message);
       alert('There was an error uploading the product. Please try again.');
     }
   };
 
-  const handleEdit = (product) => {
-    setNewProduct({
-      images: product.images || [],
-      files: [], 
-      description: product.description || '',
-      tags: product.tags.join(' ') || '',
-      topic: product.topic || '',
-    });
-    setEditingProductId(product._id);
-    setIsEditing(true); 
-  };
-
-  const handleCloseModal = () => {
-    setIsEditing(false);
-    setSelectedProduct(null);
-  };
-
+  // Handle product update
   const handleProductUpdate = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -134,38 +126,65 @@ const YourProductPage = () => {
     }
 
     try {
-      const response = await axios.post(`https://car-management-system-fyne-assessment.onrender.com/api/v1/carProduct/updateProduct/${editingProductId}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-        withCredentials: true 
-      });
+      const response = await axios.post(
+        `https://car-management-system-fyne-assessment.onrender.com/api/v1/carProduct/updateProduct/${editingProductId}`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+          withCredentials: true,
+        }
+      );
 
       console.log('Product updated:', response.data);
-      window.location.reload(); 
+      navigate('/your-product');  // Navigate to the "Your Products" page after successful update
     } catch (error) {
       console.error('Error updating product:', error.response || error.message);
       alert('There was an error updating the product. Please try again.');
     }
   };
 
+  // Handle product delete
   const handleDelete = async (productId) => {
     try {
-      const response = await axios.post(`https://car-management-system-fyne-assessment.onrender.com/api/v1/carProduct/carDelete/${productId}`, null , { 
-        headers: {
+      const response = await axios.post(
+        `https://car-management-system-fyne-assessment.onrender.com/api/v1/carProduct/carDelete/${productId}`,
+        null,
+        {
+          headers: {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,  // Send token in Authorization header
-        },
-        withCredentials: true 
-      });
-      
-      console.log('Product deleted:', response.data);
-      window.location.reload(); 
+          },
+          withCredentials: true,
+        }
+      );
 
+      console.log('Product deleted:', response.data);
+      navigate('/your-product');  // Navigate to the "Your Products" page after successful deletion
     } catch (error) {
       console.error('Error deleting product:', error.response || error.message);
       alert('There was an error deleting the product. Please try again.');
     }
+  };
+
+  // Handle product edit
+  const handleEdit = (product) => {
+    setNewProduct({
+      images: product.images || [],
+      files: [],
+      description: product.description || '',
+      tags: product.tags.join(' ') || '',
+      topic: product.topic || '',
+    });
+    setEditingProductId(product._id);
+    setIsEditing(true);
+  };
+
+  // Close modal for editing
+  const handleCloseModal = () => {
+    setIsEditing(false);
+    setSelectedProduct(null);
   };
 
   return (
