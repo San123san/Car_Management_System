@@ -12,9 +12,14 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization'],
 }))
 
+// Fix for `__dirname` in ES Modules
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+
 app.use(express.json({limit: "50mb"}))   //data take when fill form in the format of json
 app.use(express.urlencoded({extended: true, limit:"50mb"}))
 app.use(express.static("public"))
+// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'dist'))); 
 app.use(cookieParser())
 
 
