@@ -93,7 +93,7 @@ const loginUser = asyncHandler(async (req, res) => {
     // }
     const options = {
         httpOnly: true,    // Prevent access via JavaScript
-        secure: process.env.NODE_ENV === 'production',  // Use secure cookies only in production (requires HTTPS)
+        // secure: process.env.NODE_ENV === 'production',  // Use secure cookies only in production (requires HTTPS)
         sameSite: 'None',  // Required for cross-origin cookies (i.e., from your frontend to backend)
         path: '/',         // Ensure the cookie is available across all routes
     };
