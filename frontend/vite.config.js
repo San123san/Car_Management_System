@@ -5,8 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   server:{
     proxy:{
-      '/api/v1/users': 'https://car-management-system-fyne-assessment.onrender.com',
-      '/api/v1/carProduct': 'https://car-management-system-fyne-assessment.onrender.com',
+      '/api': 'https://car-management-system-fyne-assessment.onrender.com',
     },
   },
   plugins: [react()],
