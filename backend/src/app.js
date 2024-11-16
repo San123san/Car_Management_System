@@ -26,6 +26,11 @@ import carRouter from './routes/car_product.routes.js'
 app.use("/api/v1/users", userRouter)
 app.use("/api/v1/carProduct", carRouter)
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
+});
+
+
 
 export {app}
 
