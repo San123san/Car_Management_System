@@ -24,6 +24,9 @@ const YourProductPage = () => {
         const response = await axios.post('https://car-management-system-fyne-assessment.onrender.com/api/v1/carProduct/listProduct',
           null, 
           { 
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,  // Send token in Authorization header
+          },
               withCredentials: true  // Make sure this is true for authenticated requests
           }
         );
@@ -87,7 +90,9 @@ const YourProductPage = () => {
       const response = await axios.post('https://car-management-system-fyne-assessment.onrender.com/api/v1/carProduct/carImageUploadWithDescriptionTopicTag', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
+        withCredentials: true 
       });
 
       console.log('Product uploaded:', response.data);
@@ -132,7 +137,9 @@ const YourProductPage = () => {
       const response = await axios.post(`https://car-management-system-fyne-assessment.onrender.com/api/v1/carProduct/updateProduct/${editingProductId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
+        withCredentials: true 
       });
 
       console.log('Product updated:', response.data);
@@ -145,7 +152,12 @@ const YourProductPage = () => {
 
   const handleDelete = async (productId) => {
     try {
-      const response = await axios.post(`https://car-management-system-fyne-assessment.onrender.com/api/v1/carProduct/carDelete/${productId}`);
+      const response = await axios.post(`https://car-management-system-fyne-assessment.onrender.com/api/v1/carProduct/carDelete/${productId}`, null , { 
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,  // Send token in Authorization header
+        },
+        withCredentials: true 
+      });
       
       console.log('Product deleted:', response.data);
       window.location.reload(); 
