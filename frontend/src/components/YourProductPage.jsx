@@ -23,7 +23,7 @@ const YourProductPage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.post('https://car-management-system-fyne-assessment.onrender.com/api/v1/carProduct/listProduct', 
+        const response = await axios.post('https://car-management-system-c8dh.onrender.com/api/v1/carProduct/listProduct', 
           null, 
           { 
             headers: {
@@ -92,7 +92,7 @@ const YourProductPage = () => {
 
     try {
       const response = await axios.post(
-        'https://car-management-system-fyne-assessment.onrender.com/api/v1/carProduct/carImageUploadWithDescriptionTopicTag',
+        'https://car-management-system-c8dh.onrender.com/api/v1/carProduct/carImageUploadWithDescriptionTopicTag',
         formData,
         {
           headers: {
@@ -128,7 +128,7 @@ const YourProductPage = () => {
 
     try {
       const response = await axios.post(
-        `https://car-management-system-fyne-assessment.onrender.com/api/v1/carProduct/updateProduct/${editingProductId}`,
+        `https://car-management-system-c8dh.onrender.com/api/v1/carProduct/updateProduct/${editingProductId}`,
         formData,
         {
           headers: {
@@ -152,7 +152,7 @@ const YourProductPage = () => {
   const handleDelete = async (productId) => {
     try {
       const response = await axios.post(
-        `https://car-management-system-fyne-assessment.onrender.com/api/v1/carProduct/carDelete/${productId}`,
+        `https://car-management-system-c8dh.onrender.com/api/v1/carProduct/carDelete/${productId}`,
         null,
         {
           headers: {
