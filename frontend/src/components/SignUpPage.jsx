@@ -21,7 +21,7 @@ const SignUpPage = () => {
     }
 
     try {
-      const response = await axios.post('https://car-management-system-fyne-assessment.onrender.com/api/v1/users/register', {
+      const response = await axios.post('https://car-management-system-c8dh.onrender.com/api/v1/users/register', {
         email,
         password
       });
