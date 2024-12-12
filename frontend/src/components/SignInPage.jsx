@@ -11,7 +11,7 @@ const SignInPage = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://car-management-system-fyne-assessment.onrender.com/api/v1/users/login', { email, password }, { withCredentials: true });
+      const response = await axios.post('https://car-management-system-c8dh.onrender.com/api/v1/users/login', { email, password }, { withCredentials: true });
       console.log(response)
       console.log(response.data)
       localStorage.setItem('accessToken', response.data.data.accessToken);
