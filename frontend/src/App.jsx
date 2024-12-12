@@ -19,7 +19,7 @@ const App = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.post('https://car-management-system-fyne-assessment.onrender.com/api/v1/carProduct/allList');
+      const response = await axios.post('https://car-management-system-c8dh.onrender.com/api/v1/carProduct/allList');
       setProducts(response.data.data); 
       setLoading(false); 
     } catch (error) {
