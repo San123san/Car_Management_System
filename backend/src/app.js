@@ -2,6 +2,10 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser'
 
+import dns from "node:dns/promises";
+
+dns.setServers(["1.1.1.1", "1.0.0.1"]);
+
 const app = express()
 
 app.use(cors({
